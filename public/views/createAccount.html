@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create an Account</title>
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/default.css">
+    <script src="../assets/js/default.js"></script>
+
+    <style>
+        form div,
+        form input,
+        form button {
+            padding: 5px;
+        }
+        
+        #form {
+            margin-top: 20%;
+        }
+    </style>
+
+</head>
+
+<body onload=onLoad();>
+    <div id="form">
+        <form class="center" id="createAccountForm" action="/sessions/new" method="POST" enctype="application/json">
+            <div>
+                <label for="username">Username: </label>
+                <input required id="username" name="username" placeholder="JohnDoe">
+                <br />
+            </div>
+            <div>
+                <label for="email">Email: </label>
+                <input required id="email" name="email" placeholder="johndoe@outlook.com">
+                <br />
+            </div>
+            <div>
+                <label for="password">Password: </label>
+                <input required type="password" id="password" name="password">
+                <br />
+            </div>
+            <div class="center">
+                <button type="submit">Create account</button>
+            </div>
+        </form>
+        <div class="center" style="min-width: 500px;">
+            <span>Already have an account? Log in <a href="../login">here</a></span>
+        </div>
+    </div>
+</body>
+
+<script>
+    function onLoad() {
+        const form = document.getElementById("createAccountForm");
+        if (form) form.addEventListener("submit", handleSubmit);
+    }
+</script>
+
+</html>

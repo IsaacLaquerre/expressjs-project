@@ -2,17 +2,55 @@
 <html>
 
 <head>
-    <title>
-        <%= title %>
-    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/default.css">
+    <script src="assets/js/default.js"></script>
+
+    <style>
+        #login,
+        #posts {
+            border: 1px solid rgb(216, 216, 216);
+            margin-top: 25px;
+            width: 25%;
+            min-height: 100px;
+            left: 37.5%;
+            top: 10%;
+            position: absolute;
+            display: none;
+        }
+    </style>
 </head>
 
-<body>
+<body onload="onLoad();">
 
-    <h1>
-        <%= body %>
-    </h1>
+    <div class="center">
+        <h2>Welcome to the blog</h2>
+        <br /><br />
+        <div id='login'>
+            <h5>Click <a href='./login'>here</a> to login</h5>
+        </div>
+        <div id='posts'>
+            <h5>Click <a href='./posts'>here</a> to go to /posts</h5>
+        </div>
+    </div>
 
 </body>
+
+<script>
+    function onLoad() {
+        isLoggedIn(function(res) {
+            if (res) {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("posts").style.display = "block";
+            } else {
+                document.getElementById("login").style.display = "block";
+                document.getElementById("posts").style.display = "none";
+            }
+        });
+    }
+</script>
 
 </html>

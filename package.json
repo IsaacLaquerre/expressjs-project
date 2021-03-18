@@ -1,27 +1,28 @@
 {
-  "name": "expressjs-project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon -x \"clear && node\" ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/IsaacLaquerre/expressjs-project.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/IsaacLaquerre/expressjs-project/issues"
-  },
-  "dependencies": {
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "mysql": "^2.18.1",
-    "nodemon": "^2.0.7",
-    "util": "^0.12.3"
-  },
-  "homepage": "https://github.com/IsaacLaquerre/expressjs-project#readme"
+    "name": "expressjs-project",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon -x \"clear && node\" ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/IsaacLaquerre/expressjs-project.git"
+    },
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/IsaacLaquerre/expressjs-project/issues"
+    },
+    "dependencies": {
+        "cookies": "^0.8.0",
+        "ejs": "^3.1.6",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "mysql": "^2.18.1",
+        "nodemon": "^2.0.7",
+        "util": "^0.12.3"
+    },
+    "homepage": "https://github.com/IsaacLaquerre/expressjs-project#readme"
 }
