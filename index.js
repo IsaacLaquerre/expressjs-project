@@ -43,6 +43,8 @@ function connectToDB() {
     });
 }
 
+connectToDB();
+
 var app = express();
 app.use(express.static(__dirname + '/public'));
 
@@ -71,7 +73,7 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {
     const body = req.body;
-    console.log(req)
+    console.log(body)
     utils.existsInTable(connection, "sessions", "email", body.email, function(exists) {
         if (!exists) {
             return res.send({
