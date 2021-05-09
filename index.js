@@ -3,8 +3,8 @@ const session = require("express-session");
 const cookies = require("cookies");
 const mysql = require("mysql");
 const hash = require('password-hash');
-//const config = require("./config.json") || "";
-//const utils = require("./utils.js") || "";
+const config = require(__dirname + "/config.json");
+const utils = require(__dirname + "/utils.js");
 
 var connection = mysql.createConnection({
     host: "us-cdbr-east-03.cleardb.com",
@@ -13,8 +13,6 @@ var connection = mysql.createConnection({
     database: process.env.dbName || config.dbName,
     flags: process.env.dbFlags || config.dbFlags
 });
-
-console.log(process.env);
 
 connection.connect(async function(err) {
     if (err) {
