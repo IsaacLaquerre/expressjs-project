@@ -42,6 +42,7 @@
 <script>
     function onLoad() {
         isLoggedIn(function(res) {
+            console.log(res);
             if (res) {
                 document.getElementById("login").style.display = "none";
                 document.getElementById("posts").style.display = "block";
