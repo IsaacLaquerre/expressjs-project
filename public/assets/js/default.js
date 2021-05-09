@@ -1,4 +1,4 @@
-const utils = require("../../../utils.js");
+<script src="../../../utils.js"></script>
 
 const apiEndpoint = "https://expressjs-project.herokuapp.com/" + utils.getConfigVars().PORT;
 
