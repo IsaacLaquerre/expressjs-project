@@ -153,6 +153,7 @@ app.get("/sessions/:token", (req, res) => {
         utils.selectFromDB(connection, function(success, resp) {
             if (success) {
                 delete resp[0].password;
+                delete resp[0].ip;
                 return res.send({
                     status: "ok",
                     data: resp[0]
