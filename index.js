@@ -68,9 +68,12 @@ app.post("/login", (req, res) => {
                 error: "E-mail or password is incorrect"
             });
         } else {
+            console.log("exists");
             utils.selectFromDB(connection, function(success, resp) {
                 if (success) {
+                    console.log("found in DB")
                     if (hash.verify(body.password, resp[0].password)) {
+                        console.log("good password")
                         var token = utils.createToken(32);
                         res.cookie("token", token);
                         utils.updateDB(connection, "sessions", "token", token, ["email", body.email], function(resp, err) {
