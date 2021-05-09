@@ -52,11 +52,12 @@ app.listen(
 var sess;
 
 app.get("/", (req, res) => {
-    req.cookie("port", process.env.PORT);
+    res.cookie("port", process.env.PORT);
     return res.sendFile("index.html", { root: "public/views" });
 });
 
 app.get("/login", (req, res) => {
+    res.cookie("port", process.env.PORT);
     return res.sendFile("login.html", { root: "public/views" });
 });
 
@@ -105,6 +106,7 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/sessions/new", (req, res) => {
+    res.cookie("port", process.env.PORT);
     return res.sendFile("createAccount.html", { root: "public/views" });
 });
 
@@ -131,6 +133,7 @@ app.post("/sessions/new", (req, res) => {
 });
 
 app.get("/sessions/:token", (req, res) => {
+    res.cookie("port", process.env.PORT);
 
     const { token } = req.params;
     const query = req.query;
