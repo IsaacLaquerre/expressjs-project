@@ -67,6 +67,10 @@ app.get("/", (req, res) => {
     return res.sendFile("index.html", { root: "public/views" });
 });
 
+app.get("/posts", (req, res) => {
+    return res.sendFile("posts.html", {root: "public/views"});
+});
+
 app.get("/login", (req, res) => {
     return res.sendFile("login.html", { root: "public/views" });
 });
