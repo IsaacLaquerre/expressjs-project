@@ -40,7 +40,7 @@ app.use(express.static(__dirname + '/public'));
 
 const PORT = process.env.PORT || 3000;
 
-app.use(session({ secret: config.secret, saveUninitialized: true, resave: true }));
+app.use(session({ secret: process.env.secret || config.secret, saveUninitialized: true, resave: true }));
 app.use(express.json());
 app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
