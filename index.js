@@ -145,20 +145,12 @@ app.get("/sessions/:token", (req, res) => {
     const { token } = req.params;
     const query = req.query;
 
-    if (req.query.exists != undefined) {
+    if (query.exists != undefined) {
         utils.existsInTable(connection, "sessions", "token", token, function(exists) {
-            if (exists) {
-                var result = {
-                    status: "ok",
-                    exists: true
-                };
-            } else {
-                var result = {
-                    status: "ok",
-                    exists: false
-                };
-            }
-            return res.send({ result });
+            return res.send({
+                status: "ok",
+                exists: exists
+            });
         });
     }else {
         utils.selectFromDB(connection, function(success, resp) {
