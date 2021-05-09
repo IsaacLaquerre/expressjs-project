@@ -2,23 +2,35 @@ const express = require("express");
 const session = require("express-session");
 const cookies = require("cookies");
 const mysql = require("mysql");
+const hash = require('password-hash');
+const config = require("./config.json");
 const utils = require("./utils.js");
 
 var connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password: 'admin',
-    database: 'expressjsproject',
-    flags: "-FOUND_ROWS"
+    user: config.dbUser,
+    password: config.dbPass,
+    database: config.dbName,
+    flags: config.dbFlags
 });
 
-connection.connect(function(err) {
+connection.connect(async function(err) {
     if (err) {
         console.error('Error connecting to database: ' + err.stack);
         return;
     }
 
     console.log('Connected to database as id ' + connection.threadId);
+
+    console.log("Setuping tables...");
+
+    var tables = {
+        tableName: ["sessions", "posts"],
+        tableValues: [["token VARCHAR(32)", "username VARCHAR(32)", "email VARCHAR(32)", "password VARCHAR(64)", "ip VARCHAR(24)"], ["title VARCHAR(32)", "body VARCHAR(254)", "author VARCHAR(32)", "date DATETIME"]]
+    } //Add tables you want to auto-setup
+    for (i in tables.tableName) {
+        await utils.setupDB(connection, tables.tableName[i], tables.tableValues[i]);
+    }
 });
 
 var app = express();
@@ -26,14 +38,12 @@ var router = express.Router();
 
 const PORT = 8080;
 
-app.use(session({ secret: "admin", saveUninitialized: true, resave: true }));
+app.use(session({ secret: config.secret, saveUninitialized: true, resave: true }));
 app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-
-app.use(session({ secret: "test", saveUninitialized: true, resave: true }));
 
 app.listen(
     PORT,
@@ -43,7 +53,7 @@ app.listen(
 var sess;
 
 app.get("/", (req, res) => {
-    res.sendFile("index.html", { root: "public/views" });
+    return res.sendFile("index.html", { root: "public/views" });
 });
 
 app.get("/login", (req, res) => {
@@ -59,16 +69,43 @@ app.post("/login", (req, res) => {
                 error: "E-mail or password is incorrect"
             });
         } else {
-            return res.send({
-                status: "ok",
-                redirect: "../"
-            });
+            utils.selectFromDB(connection, function(success, resp) {
+                if (success) {
+                    if (hash.verify(body.password, resp[0].password)) {
+                        var token = utils.createToken(32);
+                        res.cookie("token", token);
+                        utils.updateDB(connection, "sessions", "token", token, ["email", body.email], function(resp, err) {
+                            if (err) {
+                                return res.send({
+                                    status: "error",
+                                    error: "Internal server error: Couldn't update session token, please try again in a few minutes"
+                                });
+                            }else {     
+                                return res.send({
+                                    status: "ok",
+                                    redirect: "../"
+                                });
+                            }
+                        });
+                    }else {
+                        return res.send({
+                            status: "error",
+                            error: "E-mail or password is incorrect"
+                        });
+                    }
+                }else {
+                    return res.send({
+                        status: "error",
+                        error: "E-mail or password is incorrect"
+                    });
+                }
+            }, "sessions", "password");
         }
     });
 });
 
 app.get("/sessions/new", (req, res) => {
-    res.sendFile("createAccount.html", { root: "public/views" });
+    return res.sendFile("createAccount.html", { root: "public/views" });
 });
 
 app.post("/sessions/new", (req, res) => {
@@ -80,7 +117,10 @@ app.post("/sessions/new", (req, res) => {
                 error: "An account with this e-mail already exists"
             });
         } else {
-            utils.insertToDB(connection, "sessions", ["username", "email", "password", "ip"], [body.username, body.email, body.password, body.ip], function() {
+            var token = utils.generateToken();
+            res.cookie("token", token);
+            console.log(hash.generate(body.password));
+            utils.insertToDB(connection, "sessions", ["token", "username", "email", "password", "ip"], [token, body.username, body.email, hash.generate(body.password), body.ip], function() {
                 return res.send({
                     status: "ok",
                     redirect: "../"

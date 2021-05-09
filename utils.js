@@ -1,4 +1,14 @@
+const config = require("./config.json");
+
 module.exports = {
+
+    setupDB(connection, tableName, tableValues) {
+        connection.query("SELECT * FROM information_schema.tables WHERE table_schema=\"" + config.dbName + "\" AND table_name=\"" + tableName + "\" LIMIT 1;", function(err, resp, fields) {
+            if (err || resp === undefined || resp[0] === undefined) {
+                connection.query("CREATE TABLE " + tableName + " (" + tableValues.join(", ") + ")");
+            }
+        });
+    },
 
     createToken(length) {
         var result = "";
@@ -47,6 +57,16 @@ module.exports = {
 
         connection.query("INSERT INTO " + table + row + " VALUES " + value + ";");
         callback();
+    },
+
+    updateDB(connection, table, row, value, anchor, callback) {
+        connection.query("UPDATE " + table + " SET " + row + "=\"" + value + "\" WHERE " + anchor[0] + "=\"" + anchor[1] + "\"", function(err, resp, fields) {
+            callback(resp, err);
+        });
+    },
+    
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
 };

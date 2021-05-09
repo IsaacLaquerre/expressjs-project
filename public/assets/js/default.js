@@ -1,4 +1,4 @@
-const apiEndpoint = "http://192.168.0.170:8080/";
+const apiEndpoint = "http://localhost:8080/";
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -76,4 +76,19 @@ function htmlDecode(input) {
     var e = document.createElement('div');
     e.innerHTML = input;
     return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+}
+
+function showHidePassword() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+        x.type = "text";
+        document.getElementById("show").style.display = "inline-block";
+        document.getElementById("hide").style.display = "none";
+        document.getElementById("showHidePassword").title = "Hide password"
+    } else {
+        x.type = "password";
+        document.getElementById("hide").style.display = "inline-block";
+        document.getElementById("show").style.display = "none";
+        document.getElementById("showHidePassword").title = "Show password"
+    }
 }
