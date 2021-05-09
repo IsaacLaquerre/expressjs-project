@@ -18,7 +18,7 @@ function connectToDB() {
     connection.connect(async function(err) {
         if (err) {
             console.error("Error connecting to database: ", err.stack);
-            return setTimeout(connectToDB(), 5000);
+            return;
         }
 
         console.log("Connected to database as id " + connection.threadId);
