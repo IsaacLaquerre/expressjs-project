@@ -34,13 +34,12 @@ connection.connect(async function(err) {
 });
 
 var app = express();
-var router = express.Router();
+app.use(express.static(__dirname + '/public'));
 
-const PORT = 8080;
+const PORT = process.env.PORT || 3000;
 
 app.use(session({ secret: config.secret, saveUninitialized: true, resave: true }));
 app.use(express.json());
-app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
