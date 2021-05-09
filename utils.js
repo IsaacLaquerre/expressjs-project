@@ -37,7 +37,6 @@ module.exports = {
     existsInTable(connection, table, row, query, callback) {
         connection.query("SELECT EXISTS(SELECT * FROM " + table + " WHERE " + row + "='" + query + "')", function(err, resp, field) {
 
-            console.log(resp)
             if (err) {
                 callback(false, err);
                 return;

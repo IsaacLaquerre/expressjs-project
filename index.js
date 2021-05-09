@@ -73,7 +73,6 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {
     const body = req.body;
-    console.log(body)
     utils.existsInTable(connection, "sessions", "email", body.email, function(exists) {
         if (!exists) {
             return res.send({
@@ -81,12 +80,9 @@ app.post("/login", (req, res) => {
                 error: "E-mail or password is incorrect"
             });
         } else {
-            console.log("exists");
             utils.selectFromDB(connection, function(success, resp) {
                 if (success) {
-                    console.log("found in DB")
                     if (hash.verify(body.password, resp[0].password)) {
-                        console.log("good password")
                         var token = utils.createToken(32);
                         res.cookie("token", token);
                         utils.updateDB(connection, "sessions", "token", token, ["email", body.email], function(resp, err) {
@@ -134,7 +130,6 @@ app.post("/sessions/new", (req, res) => {
         } else {
             var token = utils.createToken(32);
             res.cookie("token", token);
-            console.log(hash.generate(body.password));
             utils.insertToDB(connection, "sessions", ["token", "username", "email", "password", "ip"], [token, body.username, body.email, hash.generate(body.password), body.ip], function() {
                 return res.send({
                     status: "ok",

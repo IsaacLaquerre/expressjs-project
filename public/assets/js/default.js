@@ -30,10 +30,8 @@ function handleSubmit(event) {
     event.preventDefault();
 
     const data = new FormData(event.target);
-    console.log(data)
 
     const value = Object.fromEntries(data.entries());
-    console.log(value)
 
     fetch("https://api.ipify.org/?format=json").then(body => body.json()).then(res => {
         value.ip = res.ip;
