@@ -149,18 +149,18 @@ app.get("/sessions/:token", (req, res) => {
             }
             return res.send({ result });
         });
+    }else {
+        utils.selectFromDB(connection, function(success, resp) {
+            if (success) {
+                return res.send({
+                    status: "ok",
+                    data: resp[0]
+                });
+            } else {
+                return res.status(404).sendFile("404.html", { root: "public/views" });
+            }
+        }, "sessions", "token", token);
     }
-
-    utils.selectFromDB(connection, function(success, resp) {
-        if (success) {
-            return res.send({
-                status: "ok",
-                data: resp[0]
-            });
-        } else {
-            return res.status(404).sendFile("404.html", { root: "public/views" });
-        }
-    }, "sessions", "token", token);
 });
 
 app.get("*", (req, res) => {
