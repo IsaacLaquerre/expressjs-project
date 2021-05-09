@@ -46,6 +46,7 @@ function handleSubmit(event) {
         }).then(body => body.json()).then(res => {
             if (res.status === "ok") window.location.href = res.redirect;
             else {
+                window.location.href = "../"
                 var errorDiv = document.createElement("DIV");
                 errorDiv.classList.add("center");
                 errorDiv.style.margin = "auto 40% auto 40%";
