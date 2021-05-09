@@ -1,5 +1,3 @@
-<script src="../../../utils.js"></script>
-
 const apiEndpoint = "https://expressjs-project.herokuapp.com/" + utils.getConfigVars().PORT;
 
 function getCookie(cname) {
