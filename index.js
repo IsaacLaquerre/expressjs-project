@@ -116,7 +116,7 @@ app.post("/sessions/new", (req, res) => {
                 error: "An account with this e-mail already exists"
             });
         } else {
-            var token = utils.generateToken();
+            var token = utils.generateToken(32);
             res.cookie("token", token);
             console.log(hash.generate(body.password));
             utils.insertToDB(connection, "sessions", ["token", "username", "email", "password", "ip"], [token, body.username, body.email, hash.generate(body.password), body.ip], function() {
