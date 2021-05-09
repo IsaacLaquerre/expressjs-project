@@ -1,4 +1,4 @@
-const apiEndpoint = "http://localhost:8080/";
+const apiEndpoint = "https://expressjs-project.herokuapp.com/";
 
 function getCookie(cname) {
     var name = cname + "=";
