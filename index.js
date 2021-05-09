@@ -3,8 +3,8 @@ const session = require("express-session");
 const cookies = require("cookies");
 const mysql = require("mysql");
 const hash = require('password-hash');
-const config = require(__dirname + "/src/config.json");
-const utils = require(__dirname + "/src/utils.js");
+const config = require("./src/config.json");
+const utils = require("./src/utils.js");
 
 var connection = mysql.createConnection({
     host: "us-cdbr-east-03.cleardb.com",
