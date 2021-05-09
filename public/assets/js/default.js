@@ -1,4 +1,6 @@
-const apiEndpoint = "https://expressjs-project.herokuapp.com/" + process.env.PORT;
+const utils = require("../../../utils.js");
+
+const apiEndpoint = "https://expressjs-project.herokuapp.com/" + utils.getConfigVars().PORT;
 
 function getCookie(cname) {
     var name = cname + "=";
