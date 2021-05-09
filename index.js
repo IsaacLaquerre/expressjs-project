@@ -3,8 +3,8 @@ const session = require("express-session");
 const cookies = require("cookies");
 const mysql = require("mysql");
 const hash = require('password-hash');
-const config = require("./config.json") || "";
-const utils = require("./utils.js") || "";
+//const config = require("./config.json") || "";
+//const utils = require("./utils.js") || "";
 
 var connection = mysql.createConnection({
     host: 'localhost',
