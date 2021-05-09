@@ -36,7 +36,7 @@ function handleSubmit(event) {
     fetch("https://api.ipify.org/?format=json").then(body => body.json()).then(res => {
         value.ip = res.ip;
 
-        fetch(apiEndpoint + getSubdomain(event.target.action), {
+        fetch(apiEndpoint + getPath(event.target.action), {
             method: "POST",
             body: JSON.stringify(value),
             headers: {
@@ -68,7 +68,7 @@ function getRootHost(url) {
     return url.split("/").slice(0, 3).join("/");
 }
 
-function getSubdomain(url) {
+function getPath(url) {
     return url.split("/").slice(3).join("/");
 }
 
