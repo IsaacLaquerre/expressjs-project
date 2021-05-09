@@ -1,4 +1,4 @@
-const apiEndpoint = "http://expressjs-project.herokuapp.com";
+const apiEndpoint = "http://expressjs-project.herokuapp.com/";
 
 function getCookie(cname) {
     var name = cname + "=";
