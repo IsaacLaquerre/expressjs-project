@@ -8,11 +8,13 @@ const utils = require("./utils.js");
 
 var connection = mysql.createConnection({
     host: 'localhost',
-    user: config.dbUser,
-    password: config.dbPass,
-    database: config.dbName,
-    flags: config.dbFlags
+    user: config.dbUser || process.env.dbUser,
+    password: config.dbPass || process.env.dbPass,
+    database: config.dbName || process.env.dbName,
+    flags: config.dbFlags || process.env.dbFlags
 });
+
+console.log(process.env);
 
 connection.connect(async function(err) {
     if (err) {
