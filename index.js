@@ -14,24 +14,34 @@ var connection = mysql.createConnection({
     flags: process.env.dbFlags || config.dbFlags
 });
 
-connection.connect(async function(err) {
-    if (err) {
-        console.error('Error connecting to database: ' + err.stack);
-        return;
-    }
+function connectToDB() {
+    connection.connect(async function(err) {
+        if (err) {
+            console.error("Error connecting to database: ", err.stack);
+            return setTimeout(connectToDB(), 5000);
+        }
 
-    console.log('Connected to database as id ' + connection.threadId);
+        console.log("Connected to database as id " + connection.threadId);
 
-    console.log("Setuping tables...");
+        console.log("Setuping tables...");
 
-    var tables = {
-        tableName: ["sessions", "posts"],
-        tableValues: [["token VARCHAR(32)", "username VARCHAR(32)", "email VARCHAR(32)", "password VARCHAR(64)", "ip VARCHAR(24)"], ["title VARCHAR(32)", "body VARCHAR(254)", "author VARCHAR(32)", "date DATETIME"]]
-    } //Add tables you want to auto-setup
-    for (i in tables.tableName) {
-        await utils.setupDB(connection, tables.tableName[i], tables.tableValues[i]);
-    }
-});
+        var tables = {
+            tableName: ["sessions", "posts"],
+            tableValues: [["token VARCHAR(32)", "username VARCHAR(32)", "email VARCHAR(32)", "password VARCHAR(64)", "ip VARCHAR(24)"], ["title VARCHAR(32)", "body VARCHAR(254)", "author VARCHAR(32)", "date DATETIME"]]
+        } //Add tables you want to auto-setup
+        for (i in tables.tableName) {
+            await utils.setupDB(connection, tables.tableName[i], tables.tableValues[i]);
+        }
+    });
+    connection.on("error", function(err) {
+        console.log("Database server error: ", err.stack);
+        if (err.code === "PROTOCOL_CONNECTION_LOST") {
+            connectToDB();
+        }else {
+            throw err;
+        }
+    });
+}
 
 var app = express();
 app.use(express.static(__dirname + '/public'));
