@@ -8,10 +8,10 @@ const hash = require('password-hash');
 
 var connection = mysql.createConnection({
     host: 'localhost',
-    user: config.dbUser || process.env.dbUser,
-    password: config.dbPass || process.env.dbPass,
-    database: config.dbName || process.env.dbName,
-    flags: config.dbFlags || process.env.dbFlags
+    user: process.env.dbUser || config.dbUser,
+    password: process.env.dbPass || config.dbPass,
+    database: process.env.dbName || config.dbName,
+    flags: process.env.dbFlags || config.dbFlags
 });
 
 console.log(process.env);
