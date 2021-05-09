@@ -52,6 +52,7 @@ app.listen(
 var sess;
 
 app.get("/", (req, res) => {
+    req.cookie("port", process.env.PORT);
     return res.sendFile("index.html", { root: "public/views" });
 });
 

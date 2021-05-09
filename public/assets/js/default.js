@@ -1,10 +1,3 @@
-const utils = (function(document, tag) {
-    var scriptTag = document.createElement(tag),
-        firstScriptTag = document.getElementsByTagName(tag)[0];
-    scriptTag.src = '../../../utils.js';
-    firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
-}(document, 'script'));
-
 const apiEndpoint = "https://expressjs-project.herokuapp.com/" + utils.getConfigVars().PORT;
 
 function getCookie(cname) {
