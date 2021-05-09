@@ -19,6 +19,7 @@ function getCookie(cname) {
 function isLoggedIn(callback) {
     if (getCookie("token") === "null") callback(false);
     fetch(apiEndpoint + "sessions/" + getCookie("token") + "?exists").then((body) => {
+        console.log(body)
         body.json().then((res) => {
             if (res.exists) callback(true);
             else callback(false);
