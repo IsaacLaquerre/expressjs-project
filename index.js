@@ -7,7 +7,7 @@ const hash = require('password-hash');
 //const utils = require("./utils.js") || "";
 
 var connection = mysql.createConnection({
-    host: "https://expressjs-project.herokuapp.com/",
+    host: "us-cdbr-east-03.cleardb.com",
     user: process.env.dbUser || config.dbUser,
     password: process.env.dbPass || config.dbPass,
     database: process.env.dbName || config.dbName,
