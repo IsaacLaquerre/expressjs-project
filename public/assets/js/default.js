@@ -70,6 +70,7 @@ function loadPosts() {
             //Create post body
             postDiv = document.createElement("DIV");
             postDiv.style.width = "500px";
+            postDiv.style.position = "relative";
 
             //Create title span tag
             titleDiv = document.createElement("DIV");
