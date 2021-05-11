@@ -33,13 +33,10 @@ function connectToDB() {
             await utils.setupDB(connection, tables.tableName[i], tables.tableValues[i]);
         }
     });
+
     connection.on("error", function(err) {
         console.log("Database server error: ", err.stack);
-        if (err.code === "PROTOCOL_CONNECTION_LOST") {
-            connectToDB();
-        }else {
-            throw err;
-        }
+        connectToDB();
     });
 }
 
