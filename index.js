@@ -74,7 +74,7 @@ app.get("/posts", (req, res) => {
 app.get("/posts/list", (req, res) => {
     utils.selectFromDB(connection, function(success, resp) {
         if (success) {
-            return({
+            return res.send({
                 status: "ok",
                 resp: resp
             });

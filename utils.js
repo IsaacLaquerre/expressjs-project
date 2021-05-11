@@ -14,7 +14,6 @@ module.exports = {
         if (row && query) query = " WHERE " + row + "='" + query + "'";
         else query = "";
         try {
-            console.log("SELECT * FROM " + table + query);
             connection.query("SELECT * FROM " + table + query + ";", function(err, resp, fields) {
                 if (err || resp[0] === undefined) {
                     callback(false, "This value doesn't exist");
