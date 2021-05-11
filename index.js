@@ -74,9 +74,11 @@ app.get("/posts", (req, res) => {
 app.get("/posts/list", (req, res) => {
     utils.selectFromDB(connection, function(success, resp) {
         if (success) {
-            console.log(resp[0]);
+            return({
+                status: "ok",
+                resp: resp
+            });
         }else {
-            console.log(resp);
             return res.send({
                 status: "error",
                 error: "Couldn't load posts, please try again later"
