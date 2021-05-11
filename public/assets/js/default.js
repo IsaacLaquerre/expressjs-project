@@ -71,6 +71,7 @@ function loadPosts() {
             postDiv = document.createElement("DIV");
             postDiv.style.width = "500px";
             postDiv.style.position = "relative";
+            postDiv.style.height = "250px;";
 
             //Create title span tag
             titleDiv = document.createElement("DIV");
