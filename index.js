@@ -78,6 +78,8 @@ app.get("/posts/new", (req, res) => {
 app.post("/posts/new", (req, res) => {
     const body = req.body;
 
+    console.log(body);
+
     utils.selectFromDB(connection, function(success, resp) {
         if (success) {
             console.log(resp);
