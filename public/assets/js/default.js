@@ -72,7 +72,8 @@ function handleSubmit(event) {
 function loadPosts() {
 
     fetch(apiEndpoint + "sessions/" + getCookie("token")).then(body => body.json()).then(res => {
-        var currentUser = res.username;
+        console.log(res);
+        var currentUser = res.resp[0].username;
 
         fetch(apiEndpoint + "posts/list").then(body => body.json()).then(res => {
             for (i in res.resp) {
