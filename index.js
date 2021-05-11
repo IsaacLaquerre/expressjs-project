@@ -71,6 +71,26 @@ app.get("/posts", (req, res) => {
     return res.sendFile("posts.html", {root: "public/views"});
 });
 
+app.get("/posts/new", (req, res) => {
+    return res.sendFile("createPost.html", {root: "public/views"});
+});
+
+app.post("/posts/new", (req, res) => {
+    const body = req.body;
+
+    utils.selectFromDB(connection, function(success, resp) {
+        if (success) {
+            console.log(resp);
+        }else {
+            console.log(resp);
+            return res.send({
+                status: "error",
+                error: "Couldn't create new post, please try again later"
+            });
+        }
+    }, "sessions", "token", body.accountToken);
+});
+
 app.get("/posts/list", (req, res) => {
     utils.selectFromDB(connection, function(success, resp) {
         if (success) {
@@ -93,9 +113,7 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {
     const body = req.body;
-    console.log(body);
     utils.existsInTable(connection, "sessions", "email", body.email, function(exists) {
-        console.log("Exists: " + exists);
         if (!exists) {
             return res.send({
                 status: "error",

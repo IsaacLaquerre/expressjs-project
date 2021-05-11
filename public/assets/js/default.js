@@ -35,6 +35,9 @@ function handleSubmit(event) {
 
     fetch("https://api.ipify.org/?format=json").then(body => body.json()).then(res => {
         value.ip = res.ip;
+        if (event.target.id == "createPostForm") {
+            value.accountToken = getCookie("token");
+        }
 
         fetch(apiEndpoint + getPath(event.target.action), {
             method: "POST",
