@@ -117,9 +117,10 @@ function loadPosts() {
     
                 if (currentUser === res.resp[i].author) {
                     deleteDiv = document.createElement("DIV");
-                    deleteDiv.position = "absolute";
-                    deleteDiv.bottom = "5px";
-                    deleteDiv.right = "10px";
+                    deleteDiv.style.position = "absolute";
+                    deleteDiv.style.bottom = "5px";
+                    deleteDiv.style.right = "10px";
+                    deleteDiv.style.borderRadius = "5px";
                     deleteDiv.style.backgroundColor = "red";
                     deleteDiv.style.border = "1px solid darkred";
                     deleteDiv.style.textAlign = "center";
