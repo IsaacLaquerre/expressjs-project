@@ -70,6 +70,12 @@ function handleSubmit(event) {
 }
 
 function loadPosts() {
+    
+    var currentUser;
+
+    fetch(apiEndpoint + "sessions/" + getCookie("token") + "?exists").then(body => body.json()).then(res => {
+        currentUser = res.username;
+    });
     fetch(apiEndpoint + "posts/list").then(body => body.json()).then(res => {
         for (i in res.resp) {
             //Create post body
@@ -101,25 +107,33 @@ function loadPosts() {
             bodySpan.innerHTML = res.resp[i].body;
             bodyDiv.appendChild(bodySpan);
 
-            //Create author span tag
-            authorSpan = document.createElement("SPAN");
-            authorSpan.style.fontSize = "10pt";
-            authorSpan.style.color = "rgb(100, 100, 100)";
-            authorSpan.style.position = "absolute";
-            authorSpan.style.bottom = "5px";
-            authorSpan.style.left = "10px";
-            authorSpan.innerHTML = "By " + res.resp[i].author;
-            bodyDiv.appendChild(authorSpan);
+            //Create author and date span tag
+            authorDateSpan = document.createElement("SPAN");
+            authorDateSpan.style.fontSize = "10pt";
+            authorDateSpan.style.color = "rgb(100, 100, 100)";
+            authorDateSpan.style.position = "absolute";
+            authorDateSpan.style.bottom = "5px";
+            authorDateSpan.style.left = "10px";
+            authorDateSpan.innerHTML = "By " + res.resp[i].author + " - " + res.resp[i].date.split("T").join(" ").substring(0, 19);;
+            bodyDiv.appendChild(authorDateSpan);
 
-            //Create date span tag
-            dateSpan = document.createElement("SPAN");
-            dateSpan.style.fontSize = "10pt";
-            dateSpan.style.color = "rgb(100, 100, 100)";
-            dateSpan.style.position = "absolute";
-            dateSpan.style.bottom = "5px";
-            dateSpan.style.right = "10px";
-            dateSpan.innerHTML = res.resp[i].date.split("T").join(" ").substring(0, 19);
-            bodyDiv.appendChild(dateSpan);
+            if (currentUser === res.resp[i].author) {
+                deleteDiv = document.createElement("DIV");
+                deleteDiv.position = "absolute";
+                deleteDiv.bottom = "5px";
+                deleteDiv.right = "10px";
+                deleteDiv.style.backgroundColor = "red";
+                deleteDiv.style.border = "1px solid darkred";
+                deleteDiv.style.textAlign = "center";
+                deleteDiv.style.width = "50px;"
+                deleteDiv.style.height = "25px;"
+                deleteDiv.style.color = "white";
+                deleteSpan = document.createElement("SPAN");
+                deleteSpan.fontSize = "8pt";
+                deleteSpan.innerHTML = "Delete";
+                deleteDiv.appendChild(deleteSpan);
+                bodyDiv.appendChild(deleteDiv);
+            }
 
             //Add body textbox to post body
             postDiv.appendChild(bodyDiv);
