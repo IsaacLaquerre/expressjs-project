@@ -89,6 +89,7 @@ function loadPosts() {
             //Create body textbox and span tag
             bodyDiv = document.createElement("DIV");
             bodyDiv.style.paddingTop = "3rem";
+            bodyDiv.style.paddingLeft = "1rem";
             bodyDiv.style.wordWrap = "break-word";
             bodySpan = document.createElement("SPAN");
             bodySpan.style.fontSize = "12pt";
