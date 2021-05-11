@@ -60,7 +60,7 @@
     function onLoad() {
         isLoggedIn(function(res) {
             if (res) {
-                window.location.href = window.location.href.split("/").pop().join("/");
+                window.location.href = "../";
             } else {
                 const form = document.getElementById("loginForm");
                 if (form) form.addEventListener("submit", handleSubmit);
