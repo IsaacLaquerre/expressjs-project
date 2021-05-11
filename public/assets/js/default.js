@@ -139,6 +139,8 @@ function loadPosts() {
                 //Add post to body of document
                 document.getElementsByTagName("body")[0].appendChild(postDiv);
                 document.getElementsByTagName("body")[0].appendChild(document.createElement("BR"));
+
+                console.log(currentUser, res.resp[i].author);
             }
         });
     });
