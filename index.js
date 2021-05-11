@@ -76,7 +76,7 @@ app.get("/posts/list", (req, res) => {
         if (success) {
             console.log(resp[0]);
         }else {
-            console.log(resp[0]);
+            console.log(resp);
             return res.send({
                 status: "error",
                 error: "Couldn't load posts, please try again later"
