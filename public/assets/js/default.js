@@ -70,8 +70,9 @@ function loadPosts() {
             //Create post body
             postDiv = document.createElement("DIV");
             postDiv.style.width = "500px";
+            postDiv.style.height = "250px";
+            postDiv.style.border = "1px solid black";
             postDiv.style.position = "relative";
-            postDiv.style.height = "250px;";
 
             //Create title span tag
             titleDiv = document.createElement("DIV");
@@ -87,7 +88,7 @@ function loadPosts() {
 
             //Create body textbox and span tag
             bodyDiv = document.createElement("DIV");
-            bodyDiv.style.paddingTop = "2rem";
+            bodyDiv.style.paddingTop = "3rem";
             bodyDiv.style.wordWrap = "break-word";
             bodySpan = document.createElement("SPAN");
             bodySpan.style.fontSize = "12pt";
