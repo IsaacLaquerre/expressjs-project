@@ -83,7 +83,7 @@ app.post("/posts/new", (req, res) => {
     utils.selectFromDB(connection, function(success, resp) {
         if (success) {
             var author = resp[0].username
-            utils.insertToDB(connection, "posts", ["title", "body", "author", "date"], [body.title, body.body, author, new Date().toISOString()], function() {
+            utils.insertToDB(connection, "posts", ["title", "body", "author", "date"], [body.title, body.body, author, (new Date().getTime() - 300*60*1000).toISOString()], function() {
                 return res.send({
                     status: "ok",
                     redirect: "../"
