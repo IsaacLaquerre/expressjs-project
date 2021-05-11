@@ -71,6 +71,19 @@ app.get("/posts", (req, res) => {
     return res.sendFile("posts.html", {root: "public/views"});
 });
 
+app.get("/posts/list", (req, res) => {
+    utils.selectFromDB(connection, function(success, resp) {
+        if (success) {
+            console.log(resp[0]);
+        }else {
+            return res.send({
+                status: "error",
+                error: "Couldn't load posts, please try again later"
+            });
+        }
+    });
+})
+;
 app.get("/login", (req, res) => {
     return res.sendFile("login.html", { root: "public/views" });
 });
