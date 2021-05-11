@@ -77,7 +77,9 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {
     const body = req.body;
+    console.log(body);
     utils.existsInTable(connection, "sessions", "email", body.email, function(exists) {
+        console.log("Exists: " + exists);
         if (!exists) {
             return res.send({
                 status: "error",
