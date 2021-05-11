@@ -71,7 +71,7 @@ function handleSubmit(event) {
 
 function loadPosts() {
 
-    fetch(apiEndpoint + "sessions/" + getCookie("token") + "?exists").then(body => body.json()).then(res => {
+    fetch(apiEndpoint + "sessions/" + getCookie("token")).then(body => body.json()).then(res => {
         var currentUser = res.username;
 
         fetch(apiEndpoint + "posts/list").then(body => body.json()).then(res => {
@@ -139,8 +139,6 @@ function loadPosts() {
                 //Add post to body of document
                 document.getElementsByTagName("body")[0].appendChild(postDiv);
                 document.getElementsByTagName("body")[0].appendChild(document.createElement("BR"));
-                
-                console.log(currentUser, res.resp[i].author);
             }
         });
     });
