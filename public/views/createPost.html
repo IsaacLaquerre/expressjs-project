@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Post</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/default.css">
+    <script src="assets/js/default.js"></script>
+
+    <style>
+        form div,
+        form input,
+        form button {
+            padding: 5px;
+        }
+        
+        #form {
+            margin-top: 20%;
+        }
+    </style>
+</head>
+
+<body onload="onLoad();">
+    <div id="form">
+        <form class="center" id="createPostForm" action="/posts/new" method="POST" enctype="application/json">
+            <div>
+                <label for="title">Title: </label>
+                <input required id="title" name="title" placeholder="My New Post">
+                <br />
+            </div>
+            <div>
+                <label for="body">Body: </label>
+                <input required id="body" name="body" placeholder="This is my new post">
+                <br />
+            </div>
+            <div class="center">
+                <button type="submit">Post</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+<script>
+    function onLoad() {
+        isLoggedIn(function(res) {
+            if (!res) {
+                window.location.href = "../login";
+            }
+        });
+        const form = document.getElementById("createAccountForm");
+        if (form) form.addEventListener("submit", handleSubmit);
+    }
+</script>
+
+</html>
