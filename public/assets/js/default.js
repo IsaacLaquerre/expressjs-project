@@ -108,7 +108,7 @@ function loadPosts() {
             authorSpan.style.position = "absolute";
             authorSpan.style.bottom = "5px";
             authorSpan.style.left = "10px";
-            authorSpan.innerHTML = "by " + res.resp[i].author;
+            authorSpan.innerHTML = "By " + res.resp[i].author;
             bodyDiv.appendChild(authorSpan);
 
             //Create date span tag
