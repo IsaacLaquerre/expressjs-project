@@ -78,7 +78,7 @@ function loadPosts() {
             titleDiv = document.createElement("DIV");
             titleDiv.style.position = "absolute";
             titleDiv.style.top = "5px";
-            titleDiv.style.left = "10px";
+            titleDiv.style.left = "1rem";
             titleSpan = document.createElement("SPAN");
             titleSpan.style.fontSize = "18pt";
             titleSpan.style.dontWeight = "bold";
