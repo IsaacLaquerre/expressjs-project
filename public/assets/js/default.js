@@ -72,8 +72,7 @@ function handleSubmit(event) {
 function loadPosts() {
 
     fetch(apiEndpoint + "sessions/" + getCookie("token")).then(body => body.json()).then(res => {
-        console.log(res);
-        var currentUser = res.resp[0].username;
+        var currentUser = res.data.username;
 
         fetch(apiEndpoint + "posts/list").then(body => body.json()).then(res => {
             for (i in res.resp) {
@@ -140,8 +139,6 @@ function loadPosts() {
                 //Add post to body of document
                 document.getElementsByTagName("body")[0].appendChild(postDiv);
                 document.getElementsByTagName("body")[0].appendChild(document.createElement("BR"));
-
-                console.log(currentUser, res.resp[i].author);
             }
         });
     });
