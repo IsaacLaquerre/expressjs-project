@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 const apiEndpoint = "http://expressjs-project.herokuapp.com/";
 
 function getCookie(cname) {
