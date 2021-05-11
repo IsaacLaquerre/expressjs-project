@@ -81,6 +81,9 @@ app.post("/posts/new", (req, res) => {
     utils.selectFromDB(connection, function(success, resp) {
         if (success) {
             console.log(resp);
+            return res.send({
+                status: "ok"
+            });
         }else {
             console.log(resp);
             return res.send({

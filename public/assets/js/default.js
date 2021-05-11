@@ -39,7 +39,7 @@ function handleSubmit(event) {
             value.accountToken = getCookie("token");
         }
 
-        console.log(apiEndpoint + getPath(event.target.action);
+        console.log(apiEndpoint + getPath(event.target.action));
 
         fetch(apiEndpoint + getPath(event.target.action), {
             method: "POST",
