@@ -88,7 +88,7 @@ app.post("/posts/new", (req, res) => {
             utils.insertToDB(connection, "posts", ["title", "body", "author", "date"], [body.title, body.body, author, estDate.toISOString()], function() {
                 return res.send({
                     status: "ok",
-                    redirect: "../"
+                    redirect: "/posts";
                 });
             });
         }else {
