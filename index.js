@@ -84,7 +84,7 @@ app.post("/posts/new", (req, res) => {
         if (success) {
             var author = resp[0].username
             var dt = new Date();
-            var estDate = new Date(dt.getTime() - 250*60*1000);
+            var estDate = new Date(dt.getTime() - 245*60*1000);
             utils.insertToDB(connection, "posts", ["title", "body", "author", "date"], [body.title, body.body, author, estDate.toISOString()], function() {
                 return res.send({
                     status: "ok",
