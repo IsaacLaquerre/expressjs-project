@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 const apiEndpoint = "http://expressjs-project.herokuapp.com/";
 
 function getCookie(cname) {
@@ -61,6 +63,61 @@ function handleSubmit(event) {
                 if (!document.getElementById("error")) document.querySelector("body").appendChild(errorDiv);
             }
         });
+    });
+}
+
+function loadPosts() {
+    fetch(apiEndpoint + "posts/list").then(body => body.json()).then(res => {
+        for (i in res.resp) {
+            //Create post body
+            postDiv = document.createElement("DIV");
+            postDiv.style.width = "500px";
+
+            //Create title span tag
+            titleDiv = document.createElement("DIV");
+            titleDiv.style.position = "absolute";
+            titleDiv.style.top = "5px";
+            titleDiv.style.left = "10px";
+            titleSpan = document.createElement("SPAN");
+            titleSpan.style.fontSize = "18pt";
+            titleSpan.style.dontWeight = "bold";
+            titleSpan.innerHTML = res.resp[i].title;
+            titleDiv.appendChild(titleSpan);
+            postDiv.appendChild(titleDiv);
+
+            //Create body textbox and span tag
+            bodyDiv = document.createElement("DIV");
+            bodySpan = document.createElement("SPAN");
+            bodySpan.style.fontSize = "12pt";
+            bodySpan.innerHTML = res.resp[i].body;
+            bodyDiv.appendChild(bodySpan);
+
+            //Create author span tag
+            authorSpan = document.createElement("SPAN");
+            authorSpan.style.fontSize = "10pt";
+            authorSpan.style.color = "rgb(100, 100, 100)";
+            authorSpan.style.position = "absolute";
+            authorSpan.style.bottom = "5px";
+            authorSpan.style.left = "10px";
+            authorSpan.innerHTML = "by " + res.resp[i].author;
+            bodyDiv.appendChild(authorSpan);
+
+            //Create date span tag
+            dateSpan = document.createElement("SPAN");
+            dateSpan.style.fontSize = "10pt";
+            dateSpan.style.color = "rgb(100, 100, 100)";
+            dateSpan.style.position = "absolute";
+            dateSpan.style.bottom = "5px";
+            dateSpan.style.right = "10px";
+            dateSpan.innerHTML = res.resp[i].date.split("T").join(" ").substring(0, 17);
+            bodyDiv.appendChild(dateSpan);
+
+            //Add body textbox to post body
+            postDiv.appendChild(bodyDiv);
+
+            //Add post to body of document
+            document.getElementsByTagName("body")[0].appendChild(postDiv);
+        }
     });
 }
 
