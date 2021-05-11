@@ -78,6 +78,7 @@ function loadPosts() {
             for (i in res.resp) {
                 //Create post body
                 postDiv = document.createElement("DIV");
+                postDiv.id = res.resp[0].id;
                 postDiv.style.width = "500px";
                 postDiv.style.height = "250px";
                 postDiv.style.border = "1px solid black";
@@ -124,9 +125,12 @@ function loadPosts() {
                     deleteDiv.style.backgroundColor = "red";
                     deleteDiv.style.border = "1px solid darkred";
                     deleteDiv.style.textAlign = "center";
+                    deleteDiv.style.padding = "5px;";
+                    deleteDiv.style.cursor = "pointer";
                     deleteDiv.style.width = "50px;"
                     deleteDiv.style.height = "25px;"
                     deleteDiv.style.color = "white";
+                    deleteDiv.onclick = ""
                     deleteSpan = document.createElement("SPAN");
                     deleteSpan.fontSize = "8pt";
                     deleteSpan.innerHTML = "Delete";
