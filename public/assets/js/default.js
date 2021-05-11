@@ -112,7 +112,7 @@ function loadPosts() {
             dateSpan.style.position = "absolute";
             dateSpan.style.bottom = "5px";
             dateSpan.style.right = "10px";
-            dateSpan.innerHTML = res.resp[i].date.split("T").join(" ").substring(0, 17);
+            dateSpan.innerHTML = res.resp[i].date.split("T").join(" ").substring(0, 19);
             bodyDiv.appendChild(dateSpan);
 
             //Add body textbox to post body
