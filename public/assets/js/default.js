@@ -70,78 +70,77 @@ function handleSubmit(event) {
 }
 
 function loadPosts() {
-    
-    var currentUser;
 
     fetch(apiEndpoint + "sessions/" + getCookie("token") + "?exists").then(body => body.json()).then(res => {
-        currentUser = res.username;
-    });
-    fetch(apiEndpoint + "posts/list").then(body => body.json()).then(res => {
-        for (i in res.resp) {
-            //Create post body
-            postDiv = document.createElement("DIV");
-            postDiv.style.width = "500px";
-            postDiv.style.height = "250px";
-            postDiv.style.border = "1px solid black";
-            postDiv.style.position = "relative";
+        var currentUser = res.username;
 
-            //Create title span tag
-            titleDiv = document.createElement("DIV");
-            titleDiv.style.position = "absolute";
-            titleDiv.style.top = "5px";
-            titleDiv.style.left = "1rem";
-            titleSpan = document.createElement("SPAN");
-            titleSpan.style.fontSize = "18pt";
-            titleSpan.style.dontWeight = "bold";
-            titleSpan.innerHTML = res.resp[i].title;
-            titleDiv.appendChild(titleSpan);
-            postDiv.appendChild(titleDiv);
-
-            //Create body textbox and span tag
-            bodyDiv = document.createElement("DIV");
-            bodyDiv.style.paddingTop = "3rem";
-            bodyDiv.style.paddingLeft = "1rem";
-            bodyDiv.style.wordWrap = "break-word";
-            bodySpan = document.createElement("SPAN");
-            bodySpan.style.fontSize = "12pt";
-            bodySpan.innerHTML = res.resp[i].body;
-            bodyDiv.appendChild(bodySpan);
-
-            //Create author and date span tag
-            authorDateSpan = document.createElement("SPAN");
-            authorDateSpan.style.fontSize = "10pt";
-            authorDateSpan.style.color = "rgb(100, 100, 100)";
-            authorDateSpan.style.position = "absolute";
-            authorDateSpan.style.bottom = "5px";
-            authorDateSpan.style.left = "10px";
-            authorDateSpan.innerHTML = "By " + res.resp[i].author + " - " + res.resp[i].date.split("T").join(" ").substring(0, 19);;
-            bodyDiv.appendChild(authorDateSpan);
-
-            if (currentUser === res.resp[i].author) {
-                deleteDiv = document.createElement("DIV");
-                deleteDiv.position = "absolute";
-                deleteDiv.bottom = "5px";
-                deleteDiv.right = "10px";
-                deleteDiv.style.backgroundColor = "red";
-                deleteDiv.style.border = "1px solid darkred";
-                deleteDiv.style.textAlign = "center";
-                deleteDiv.style.width = "50px;"
-                deleteDiv.style.height = "25px;"
-                deleteDiv.style.color = "white";
-                deleteSpan = document.createElement("SPAN");
-                deleteSpan.fontSize = "8pt";
-                deleteSpan.innerHTML = "Delete";
-                deleteDiv.appendChild(deleteSpan);
-                bodyDiv.appendChild(deleteDiv);
+        fetch(apiEndpoint + "posts/list").then(body => body.json()).then(res => {
+            for (i in res.resp) {
+                //Create post body
+                postDiv = document.createElement("DIV");
+                postDiv.style.width = "500px";
+                postDiv.style.height = "250px";
+                postDiv.style.border = "1px solid black";
+                postDiv.style.position = "relative";
+    
+                //Create title span tag
+                titleDiv = document.createElement("DIV");
+                titleDiv.style.position = "absolute";
+                titleDiv.style.top = "5px";
+                titleDiv.style.left = "1rem";
+                titleSpan = document.createElement("SPAN");
+                titleSpan.style.fontSize = "18pt";
+                titleSpan.style.dontWeight = "bold";
+                titleSpan.innerHTML = res.resp[i].title;
+                titleDiv.appendChild(titleSpan);
+                postDiv.appendChild(titleDiv);
+    
+                //Create body textbox and span tag
+                bodyDiv = document.createElement("DIV");
+                bodyDiv.style.paddingTop = "3rem";
+                bodyDiv.style.paddingLeft = "1rem";
+                bodyDiv.style.wordWrap = "break-word";
+                bodySpan = document.createElement("SPAN");
+                bodySpan.style.fontSize = "12pt";
+                bodySpan.innerHTML = res.resp[i].body;
+                bodyDiv.appendChild(bodySpan);
+    
+                //Create author and date span tag
+                authorDateSpan = document.createElement("SPAN");
+                authorDateSpan.style.fontSize = "10pt";
+                authorDateSpan.style.color = "rgb(100, 100, 100)";
+                authorDateSpan.style.position = "absolute";
+                authorDateSpan.style.bottom = "5px";
+                authorDateSpan.style.left = "10px";
+                authorDateSpan.innerHTML = "By " + res.resp[i].author + " - " + res.resp[i].date.split("T").join(" ").substring(0, 19);;
+                bodyDiv.appendChild(authorDateSpan);
+    
+                if (currentUser === res.resp[i].author) {
+                    deleteDiv = document.createElement("DIV");
+                    deleteDiv.position = "absolute";
+                    deleteDiv.bottom = "5px";
+                    deleteDiv.right = "10px";
+                    deleteDiv.style.backgroundColor = "red";
+                    deleteDiv.style.border = "1px solid darkred";
+                    deleteDiv.style.textAlign = "center";
+                    deleteDiv.style.width = "50px;"
+                    deleteDiv.style.height = "25px;"
+                    deleteDiv.style.color = "white";
+                    deleteSpan = document.createElement("SPAN");
+                    deleteSpan.fontSize = "8pt";
+                    deleteSpan.innerHTML = "Delete";
+                    deleteDiv.appendChild(deleteSpan);
+                    bodyDiv.appendChild(deleteDiv);
+                }
+    
+                //Add body textbox to post body
+                postDiv.appendChild(bodyDiv);
+    
+                //Add post to body of document
+                document.getElementsByTagName("body")[0].appendChild(postDiv);
+                document.getElementsByTagName("body")[0].appendChild(document.createElement("BR"));
             }
-
-            //Add body textbox to post body
-            postDiv.appendChild(bodyDiv);
-
-            //Add post to body of document
-            document.getElementsByTagName("body")[0].appendChild(postDiv);
-            document.getElementsByTagName("body")[0].appendChild(document.createElement("BR"));
-        }
+        });
     });
 }
 
