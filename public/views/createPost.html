@@ -44,13 +44,14 @@
 
 <script>
     function onLoad() {
+        const form = document.getElementById("createPostForm");
+        if (form) form.addEventListener("submit", handleSubmit);
+
         isLoggedIn(function(res) {
             if (!res) {
                 window.location.href = "../login";
             }
         });
-        const form = document.getElementById("createAccountForm");
-        if (form) form.addEventListener("submit", handleSubmit);
     }
 </script>
 
