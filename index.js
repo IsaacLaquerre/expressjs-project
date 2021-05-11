@@ -81,7 +81,7 @@ app.get("/posts/list", (req, res) => {
                 error: "Couldn't load posts, please try again later"
             });
         }
-    });
+    }, "posts");
 })
 ;
 app.get("/login", (req, res) => {
