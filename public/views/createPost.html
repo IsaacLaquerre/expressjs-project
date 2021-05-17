@@ -68,7 +68,7 @@
         var currentCharCount = document.getElementById("body").value.length;
         
         if (currentCharCount > 254) {
-            if (event.keyCode != "8" && event.location != "1" && event.location != "2") event.preventDefault();
+            if (event.keyCode != "8" && event.location != "1" && event.location != "2") document.execCommand("undo");
         }else {
             document.getElementById("charCount").innerHTML = currentCharCount + "/254";
         }
