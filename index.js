@@ -118,8 +118,35 @@ app.get("/posts/list", (req, res) => {
             });
         }
     }, "posts");
-})
-;
+});
+
+app.delete("/posts/:id", (req, res) => {
+    var id = req.params.id
+    
+    utils.existsInTable(connection, "posts", "id", id, function(exists) {
+        if (!exists) {
+            return res.send({
+                status: "error",
+                error: "Post does not exists"
+            });
+        }else {
+            utils.deleteFromDB(connection, "posts", "id", id, function(resp, err) {
+                if (err) {
+                    return res.send({
+                        status: "error",
+                        error: err
+                    });
+                }else {
+                    return res.send({
+                        status: "ok",
+                        resp: "Deleted post #" + id
+                    });
+                }
+            });
+        }
+    }) 
+});
+
 app.get("/login", (req, res) => {
     return res.sendFile("login.html", { root: "public/views" });
 });
