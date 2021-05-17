@@ -68,7 +68,7 @@
         var currentCharCount = 0;
         
         currentCharCount = charCountSpan.innerHTML.split("/")[0];
-        document.getElementById("charCount") = currentCharCount + "/254";
+        document.getElementById("charCount").innerHTML = currentCharCount + "/254";
         console.log(currentCharCount);
         
         if (parseInt(currentCharCount) >= 254) {
