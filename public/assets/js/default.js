@@ -80,7 +80,7 @@ function loadPosts() {
                 postDiv = document.createElement("DIV");
                 postDiv.id = res.resp[0].id;
                 postDiv.style.width = "500px";
-                postDiv.style.height = "250px";
+                postDiv.style.height = "200px";
                 postDiv.style.border = "1px solid black";
                 postDiv.style.position = "relative";
     
