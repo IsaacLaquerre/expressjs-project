@@ -40,7 +40,7 @@
                 <br />
             </div>
             <div>
-                <textarea style="margin-top: 25px;" required id="body" name="body"></textarea>
+                <textarea style="margin-top: 25px; resize: none;" required onchange="countChars(this.innerHTML);" id="body" name="body"></textarea>
                 <br />
             </div>
             <div class="center">
@@ -60,6 +60,15 @@
                 window.location.href = "../login";
             }
         });
+    }
+    
+    function countChars(elText) {
+        var charCountSpan = document.getElementById("charCount");
+        var currentCharCount = 0;
+        var maxCharCount = charCountSpan.split("/")[1];
+        
+        currentCharCount = elText.length;
+        document.getElementById("charCount") = currentCharCount + "/" + maxCharCount;
     }
 </script>
 
