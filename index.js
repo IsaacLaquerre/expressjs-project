@@ -82,6 +82,12 @@ app.post("/posts/new", (req, res) => {
             var author = resp[0].username
             var dt = new Date();
             var estDate = new Date(dt.getTime() - 240*60*1000);
+            if (body.body.length > 254) {
+                return res.send({
+                    status: "error",
+                    error: "Post body cannot exceed 254 characters"
+                });
+            }
             utils.insertToDB(connection, "posts", ["title", "body", "author", "date"], [body.title, body.body, author, estDate.toISOString()], function() {
                 return res.send({
                     status: "ok",
