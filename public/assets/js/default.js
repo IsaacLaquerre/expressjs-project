@@ -125,12 +125,12 @@ function loadPosts() {
                     deleteDiv.style.backgroundColor = "red";
                     deleteDiv.style.border = "1px solid darkred";
                     deleteDiv.style.textAlign = "center";
-                    deleteDiv.style.padding = "5px;";
+                    deleteDiv.style.padding = "10px;";
                     deleteDiv.style.cursor = "pointer";
                     deleteDiv.style.width = "50px;"
                     deleteDiv.style.height = "25px;"
                     deleteDiv.style.color = "white";
-                    deleteDiv.onclick = ""
+                    deleteDiv.onclick = "deletePost(this)";
                     deleteSpan = document.createElement("SPAN");
                     deleteSpan.fontSize = "8pt";
                     deleteSpan.innerHTML = "Delete";
@@ -146,6 +146,19 @@ function loadPosts() {
                 document.getElementsByTagName("body")[0].appendChild(document.createElement("BR"));
             }
         });
+    });
+}
+
+function deletePost(el) {
+    var postID = el.parentNode.parentNode.id<
+    fetch(apiEndpoint + "posts/" + postID, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        }
+    }).then(bpdy => body.json()).then(res => {
+        console.log(res);
     });
 }
 
