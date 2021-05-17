@@ -58,6 +58,12 @@ module.exports = {
         });
     },
 
+    deleteFromDB(connection, table, row, value, callback) {
+        connecction.query("DELETE FROM " + table + " WHERE " + row + "='" + value + "' LIMIT 1;"), function(err, resp, fields) {
+            callback(resp, err);
+        };
+    },
+    
     createToken(length) {
         var result = "";
         var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
