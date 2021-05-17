@@ -40,7 +40,9 @@
                 <br />
             </div>
             <div>
-                <textarea style="margin-top: 25px; resize: none;" required onchange="countChars(this.innerHTML);" id="body" name="body"></textarea>
+                <textarea style="margin-top: 25px; resize: none;" required onchange="countChars(this.innerHTML);" id="body" name="body">
+                    <span id="charCount">0/254</span>
+                </textarea>
                 <br />
             </div>
             <div class="center">
@@ -65,10 +67,15 @@
     function countChars(elText) {
         var charCountSpan = document.getElementById("charCount");
         var currentCharCount = 0;
-        var maxCharCount = charCountSpan.split("/")[1];
         
         currentCharCount = elText.length;
-        document.getElementById("charCount") = currentCharCount + "/" + maxCharCount;
+        document.getElementById("charCount") = currentCharCount + "/254";
+        
+        if (parseInt(currentCharCount) >= 254) {
+            document.getElementById("body").readOnly = true;
+        }else {
+            document.getElementById("body").readOnly = false;
+        }
     }
 </script>
 
