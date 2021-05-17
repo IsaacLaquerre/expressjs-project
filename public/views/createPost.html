@@ -65,9 +65,8 @@
     
     function countChars(event) {
         var charCountSpan = document.getElementById("charCount");
-        var currentCharCount = 0;
+        var currentCharCount = document.getElementById("body").value.length;
         
-        currentCharCount = document.getElementById("body").value.length + 1;
         if (currentCharCount > 254) {
             if (event.keyCode != "8" && event.location != "1" && event.location != "2") event.preventDefault();
         }else {
