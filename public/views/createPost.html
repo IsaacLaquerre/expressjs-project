@@ -69,9 +69,9 @@
         
         currentCharCount = document.getElementById("body").innerHTML.length;
         document.getElementById("charCount").innerHTML = currentCharCount + "/254";
-        console.log(charCountSpan.innerHTML, currentCharCount);
+        console.log(document.getElementById("body").innerHTML, currentCharCount);
         
-        if (parseInt(currentCharCount) >= 254) {
+        if (currentCharCount >= 254) {
             if (event.keyCode != "8") return false
         }
     }
