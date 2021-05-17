@@ -69,6 +69,7 @@
         
         currentCharCount = charCountSpan.innerHTML.split("/")[0];
         document.getElementById("charCount") = currentCharCount + "/254";
+        console.log(currentCharCount);
         
         if (parseInt(currentCharCount) >= 254) {
             document.getElementById("body").readOnly = true;
