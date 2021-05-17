@@ -67,7 +67,7 @@
         var charCountSpan = document.getElementById("charCount");
         var currentCharCount = 0;
         
-        currentCharCount = charCountSpan.innerHTML.length;
+        currentCharCount = document.getElementById("body").innerHTML.length;
         document.getElementById("charCount").innerHTML = currentCharCount + "/254";
         console.log(charCountSpan.innerHTML, currentCharCount);
         
