@@ -150,7 +150,7 @@ function loadPosts() {
 }
 
 function deletePost(id) {
-    conosle.log(id)
+    console.log(id)
     var postID = id
     fetch(apiEndpoint + "posts/" + postID, {
         method: "DELETE",
