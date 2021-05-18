@@ -158,7 +158,7 @@ function deletePost(id) {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*"
         }
-    }).then(bpdy => body.json()).then(res => {
+    }).then(body => body.json()).then(res => {
         console.log(res);
     });
 }
