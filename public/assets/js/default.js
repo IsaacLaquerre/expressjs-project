@@ -118,7 +118,7 @@ function loadPosts() {
     
                 if (currentUser === res.resp[i].author) {
                     deleteDiv = document.createElement("DIV");
-                    deleteDiv.onclick = "deletePost(this.id)";
+                    deleteDiv.onclick = "deletePost(this.parentNode.parentNode.id)";
                     deleteDiv.style.position = "absolute";
                     deleteDiv.style.bottom = "5px";
                     deleteDiv.style.right = "10px";
@@ -149,9 +149,9 @@ function loadPosts() {
     });
 }
 
-function deletePost(el) {
-    conosle.log(el)
-    var postID = el.parentNode.parentNode.id
+function deletePost(id) {
+    conosle.log(id)
+    var postID = id
     fetch(apiEndpoint + "posts/" + postID, {
         method: "DELETE",
         headers: {
