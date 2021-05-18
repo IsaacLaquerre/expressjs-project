@@ -150,7 +150,8 @@ function loadPosts() {
 }
 
 function deletePost(el) {
-    var postID = el.parentNode.parentNode.id<
+    var postID = el.parentNode.parentNode.id
+    conosle.log(el, postID)
     fetch(apiEndpoint + "posts/" + postID, {
         method: "DELETE",
         headers: {
