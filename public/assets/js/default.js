@@ -118,6 +118,7 @@ function loadPosts() {
     
                 if (currentUser === res.resp[i].author) {
                     deleteDiv = document.createElement("DIV");
+                    deleteDiv.onclick = "deletePost(this.id)";
                     deleteDiv.style.position = "absolute";
                     deleteDiv.style.bottom = "5px";
                     deleteDiv.style.right = "10px";
@@ -130,7 +131,6 @@ function loadPosts() {
                     deleteDiv.style.width = "50px;"
                     deleteDiv.style.height = "25px;"
                     deleteDiv.style.color = "white";
-                    deleteDiv.onclick = "deletePost(this)";
                     deleteSpan = document.createElement("SPAN");
                     deleteSpan.fontSize = "8pt";
                     deleteSpan.innerHTML = "Delete";
@@ -150,8 +150,8 @@ function loadPosts() {
 }
 
 function deletePost(el) {
+    conosle.log(el)
     var postID = el.parentNode.parentNode.id
-    conosle.log(el, postID)
     fetch(apiEndpoint + "posts/" + postID, {
         method: "DELETE",
         headers: {
